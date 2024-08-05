@@ -1,0 +1,75 @@
+/* admin.css */
+
+/* Styles for the Admin page container */
+.admin-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Styles for the Admin form */
+.admin-form {
+  width: 100%;
+  max-width: 400px; /* Maximum width for the form */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Styles for form labels */
+.admin-label {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff; /* Dark text color */
+}
+
+/* Styles for form inputs */
+.admin-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #cccccc; /* Light border */
+  border-radius: 4px;
+  margin-top: 5px; /* Space between label and input */
+  transition: border-color 0.3s ease; /* Smooth transition */
+}
+
+/* Styles for the input fields when focused */
+.admin-input:focus {
+  border-color: #5a9bd5; /* Blue border on focus */
+  outline: none; /* Remove outline */
+}
+
+/* Styles for select dropdown */
+.admin-input select {
+  appearance: none;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+/* Additional styling for the file input */
+.admin-input[type="file"] {
+  padding: 5px; /* Reduced padding for file input */
+}
+.admin-button {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #5a9bd5;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+/* Responsive design */
+@media (max-width: 600px) {
+  .admin-form {
+    padding: 15px;
+  }
+}
