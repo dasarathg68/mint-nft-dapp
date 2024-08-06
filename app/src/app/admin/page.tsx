@@ -1,5 +1,4 @@
 "use client";
-import "../css/Admin.css";
 import { useState } from "react";
 import { useWriteContract } from "wagmi";
 import { abi, address as contractAddress } from "../../constants";
@@ -34,42 +33,78 @@ const Admin = () => {
   };
   return (
     <>
-      <div className="admin-page">
-        <form className="admin-form" onSubmit={handleSubmit}>
-          <label htmlFor="memberName" className="admin-label">
+      <div className="flex justify-center items-center p-5 bg-gray-100 min-h-screen">
+        <form
+          className="w-full max-w-md bg-white rounded-lg shadow-md p-5 space-y-5"
+          onSubmit={handleSubmit}
+        >
+          <label
+            htmlFor="memberName"
+            className="block text-gray-700 font-medium"
+          >
             Name:
-            <input type="text" name="memberName" className="admin-input" />
+            <input
+              type="text"
+              name="memberName"
+              className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
           </label>
-          <label htmlFor="memberImage" className="admin-label">
+          <label
+            htmlFor="memberImage"
+            className="block text-gray-700 font-medium"
+          >
             Image:
-            <input type="file" name="memberImage" className="admin-input" />
+            <input
+              type="file"
+              name="memberImage"
+              className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
           </label>
-          <label htmlFor="memberRole" className="admin-label">
+          <label
+            htmlFor="memberRole"
+            className="block text-gray-700 font-medium"
+          >
             Role:
-            <select name="memberRole" className="admin-input">
+            <select
+              name="memberRole"
+              className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white appearance-none"
+            >
               <option value="member">Admin</option>
               <option value="vice-president">Vice President</option>
               <option value="mentor">Mentor</option>
             </select>
           </label>
-          <label htmlFor="memberBatch" className="admin-label">
-            Role:
-            <select name="memberBatch" className="admin-input">
+          <label
+            htmlFor="memberBatch"
+            className="block text-gray-700 font-medium"
+          >
+            Batch:
+            <select
+              name="memberBatch"
+              className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white appearance-none"
+            >
               <option value="2024">2024</option>
               <option value="2023">2023</option>
               <option value="2022">2022</option>
             </select>
           </label>
-          <label htmlFor="address" className="admin-label">
+          <label htmlFor="address" className="block text-gray-700 font-medium">
             Address:
-            <input type="text" name="address" className="admin-input" />
+            <input
+              type="text"
+              name="address"
+              className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
           </label>
-          <button type="submit" className="admin-button">
+          <button
+            type="submit"
+            className="w-full py-2 px-4 text-white bg-blue-500 hover:bg-blue-600 rounded font-medium transition-colors duration-300"
+          >
             Mint your NFT
           </button>
         </form>
       </div>
-      <div className="status">{status}</div>
+      <div className="text-center mt-4">{status}</div>
     </>
   );
 };
