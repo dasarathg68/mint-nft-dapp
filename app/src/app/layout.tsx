@@ -7,8 +7,8 @@ import { cookieToInitialState } from "wagmi";
 
 import { getConfig } from "../wagmi";
 import { Providers } from "./providers";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
+import { NavBar } from "./components/NavBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,10 +23,10 @@ export default function RootLayout(props: { children: ReactNode }) {
     headers().get("cookie")
   );
   return (
-    <html lang="en">
+    <html lang="en" data-theme="cupcake">
       <body className={inter.className}>
         <Providers initialState={initialState}>
-          <ConnectButton />
+          <NavBar />
 
           {props.children}
         </Providers>
