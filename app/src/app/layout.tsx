@@ -23,7 +23,7 @@ export default function RootLayout(props: { children: ReactNode }) {
     headers().get("cookie")
   );
   return (
-    <html lang="en" data-theme="cupcake">
+    <html lang="en" data-theme="cyberpunk">
       <body className={inter.className}>
         <Providers initialState={initialState}>
           <NavBar />

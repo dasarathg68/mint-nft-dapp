@@ -34,14 +34,14 @@ const Admin = () => {
   return (
     <>
       <div className="flex flex-col justify-center items-center">
-        <h1 className="text-3xl font-bold underline mt-20">Admin Panel</h1>
+        <h1 className="text-3xl mt-20">Admin Panel</h1>
 
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center border">
           <form
             className="w-full max-w-md  rounded-lg shadow-md p-5"
             onSubmit={handleSubmit}
           >
-            <label htmlFor="memberName" className="block  font-medium">
+            <label htmlFor="memberName" className="block mt-4 font-medium">
               Name:
               <input
                 type="text"
@@ -49,15 +49,15 @@ const Admin = () => {
                 className="w-full mt-1 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </label>
-            <label htmlFor="memberImage" className="block font-medium">
+            <label htmlFor="memberImage" className="block font-medium mt-4">
               Image:
               <input
                 type="file"
                 name="memberImage"
-                className="w-full mt-1 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="file-input  w-full max-w-xs mt-1 p-2 "
               />
             </label>
-            <label htmlFor="memberRole" className="block font-medium">
+            <label htmlFor="memberRole" className="block font-medium mt-4">
               Role:
               <select
                 name="memberRole"
@@ -68,7 +68,7 @@ const Admin = () => {
                 <option value="mentor">Mentor</option>
               </select>
             </label>
-            <label htmlFor="memberBatch" className="block font-medium">
+            <label htmlFor="memberBatch" className="block font-medium mt-4">
               Batch:
               <select
                 name="memberBatch"
@@ -79,7 +79,7 @@ const Admin = () => {
                 <option value="2022">2022</option>
               </select>
             </label>
-            <label htmlFor="address" className="block font-medium">
+            <label htmlFor="address" className="block font-medium mt-4">
               Address:
               <input
                 type="text"
@@ -89,7 +89,7 @@ const Admin = () => {
             </label>
             <button
               type="submit"
-              className="w-full py-2 px-4  bg-blue-500 hover:bg-blue-600 rounded font-medium transition-colors duration-300"
+              className="w-full py-2 px-4 mt-4 bg-blue-500 hover:bg-blue-600 rounded font-medium transition-colors duration-300"
             >
               Mint your NFT
             </button>
