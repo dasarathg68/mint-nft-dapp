@@ -25,9 +25,7 @@ const Admin = () => {
     event.preventDefault();
     refetchOwner();
     if (ownerAddress !== currentAddress) {
-      toast.error("You are not the owner of the contract", {
-        autoClose: 10000,
-      });
+      toast.error("You are not the owner of the contract");
       setIsSubmitting(false);
       return;
     }
