@@ -1,10 +1,21 @@
+"use client";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 const UserNFT = ({ data }) => {
+  const router = useRouter();
   if (!data) {
     return (
-      <div className="flex items-center justify-center py-8 text-gray-600 text-xl">
-        No Data Available
+      <div className="flex flex-col items-center justify-center py-8 text-gray-600 text-2xl">
+        <div>No NFT found for this address</div>
+        <button
+          className="btn btn-secondary mt-4"
+          onClick={() => {
+            router.push("/admin");
+          }}
+        >
+          Mint NFT
+        </button>
       </div>
     );
   }
