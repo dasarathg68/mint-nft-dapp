@@ -33,7 +33,7 @@ const Admin = () => {
   };
   return (
     <>
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center min-h-screen">
         <h1 className="text-3xl mt-20">Admin Panel</h1>
 
         <div className="flex justify-center items-center border">

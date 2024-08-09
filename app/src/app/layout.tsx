@@ -24,7 +24,7 @@ export default function RootLayout(props: { children: ReactNode }) {
   );
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={inter.className} data-theme="cupcake">
         <Providers initialState={initialState}>
           <NavBar />
 

@@ -65,7 +65,7 @@ const Page = () => {
   }, [uri]);
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center min-h-screen">
       <UserNft data={userData} />
       <Members members={data} />
     </div>
