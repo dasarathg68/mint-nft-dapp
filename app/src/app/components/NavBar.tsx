@@ -83,17 +83,7 @@ export const NavBar = () => {
                 />
               </label>
             </div>
-            <div className="form-control">
-              <label className="label cursor-pointer gap-4">
-                <span className="label-text">Dark</span>
-                <input
-                  type="radio"
-                  name="theme-radios"
-                  className="radio hidden theme-controller "
-                  value="dark"
-                />
-              </label>
-            </div>
+
             <div className="form-control">
               <label className="label cursor-pointer gap-4">
                 <span className="label-text">Cupcake</span>
