@@ -36,6 +36,8 @@ const Page = () => {
         } finally {
           setLoading(false);
         }
+      } else {
+        setLoading(false);
       }
     };
 
