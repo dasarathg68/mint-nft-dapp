@@ -17,29 +17,33 @@ export const NavBar = () => {
           NFT Club Membership
         </a>
       </div>
+
       <div className="navbar-end">
+        <div className="flex-none">
+          <ul className="menu menu-horizontal px-1 ">
+            <li>
+              <details className="min-w-36">
+                <summary>Pages</summary>
+                <ul className="bg-base-100 rounded-t-none p-2">
+                  <li>
+                    <a onClick={() => router.push("/member")}>Member</a>
+                  </li>
+                  <li>
+                    <a onClick={() => router.push("/admin")}>Admin</a>
+                  </li>
+                  <li>
+                    <a onClick={() => router.push("/listNFTs")}>
+                      View All NFTs
+                    </a>
+                  </li>
+                </ul>
+              </details>
+            </li>
+          </ul>
+        </div>
         <ConnectButton />
       </div>
-      <div className="flex-none">
-        <ul className="menu menu-horizontal px-1 ">
-          <li>
-            <details className="min-w-36">
-              <summary>Pages</summary>
-              <ul className="bg-base-100 rounded-t-none p-2">
-                <li>
-                  <a onClick={() => router.push("/member")}>Member</a>
-                </li>
-                <li>
-                  <a onClick={() => router.push("/admin")}>Admin</a>
-                </li>
-                <li>
-                  <a onClick={() => router.push("/listNFTs")}>View All NFTs</a>
-                </li>
-              </ul>
-            </details>
-          </li>
-        </ul>
-      </div>
+
       <div className="dropdown dropdown-end flex">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost">
