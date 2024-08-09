@@ -2,17 +2,31 @@
 import { useState } from "react";
 import { useWriteContract } from "wagmi";
 import { abi, address as contractAddress } from "../../constants";
+import { useReadContract, useAccount } from "wagmi";
 import { isAddress } from "ethers";
 const Admin = () => {
   const [status, setStatus] = useState<string>("");
   const [isValid, setIsValid] = useState(true);
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { address: currentAddress } = useAccount();
+  const { data: ownerAddress, refetch: refetchOwner } = useReadContract({
+    abi,
+    address: contractAddress,
+    functionName: "owner",
+    args: [],
+  });
 
   const { writeContract } = useWriteContract();
   const handleSubmit = async (event: any) => {
     setIsSubmitting(true);
     event.preventDefault();
+    refetchOwner();
+    if (ownerAddress !== currentAddress) {
+      setStatus("You are not the owner of the contract");
+      setIsSubmitting(false);
+      return;
+    }
     const formData = new FormData(event.target);
     if (
       !isValid ||
