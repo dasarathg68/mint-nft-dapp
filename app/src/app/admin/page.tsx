@@ -7,9 +7,11 @@ const Admin = () => {
   const [status, setStatus] = useState<string>("");
   const [isValid, setIsValid] = useState(true);
   const [isFileUploaded, setIsFileUploaded] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { writeContract } = useWriteContract();
   const handleSubmit = async (event: any) => {
+    setIsSubmitting(true);
     event.preventDefault();
     const formData = new FormData(event.target);
     if (
@@ -21,6 +23,7 @@ const Admin = () => {
       !formData.get("address")
     ) {
       setStatus("Invalid form data");
+      setIsSubmitting(false);
       return;
     }
 
@@ -33,6 +36,7 @@ const Admin = () => {
     setStatus("Uploaded metadata to IPFS, now minting NFT...");
     await mintNFT((result as any).NFTUri, formData.get("address") as string);
     setStatus("NFT minted successfully");
+    setIsSubmitting(false);
   };
   const mintNFT = async (uri: string, userAddress: string) => {
     try {
@@ -122,9 +126,15 @@ const Admin = () => {
             {isValid ? null : (
               <div className="text-red-800">Invalid address</div>
             )}
-            <button type="submit" className="btn btn-primary mt-4 w-full">
-              Mint your NFT
-            </button>
+            {!isSubmitting ? (
+              <button type="submit" className="btn btn-primary mt-4 w-full">
+                Mint your NFT
+              </button>
+            ) : (
+              <button className="btn btn-secondary mt-4 w-full">
+                <span className="loading loading-spinner loading-sm text-white"></span>
+              </button>
+            )}
           </form>
         </div>
         <div className="text-center mt-4">{status}</div>
