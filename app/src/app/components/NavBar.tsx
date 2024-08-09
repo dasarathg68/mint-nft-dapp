@@ -9,7 +9,7 @@ export const NavBar = () => {
       <div className="navbar-end">
         <ConnectButton />
       </div>
-      <div className="dropdown dropdown-end">
+      <div className="dropdown dropdown-end flex">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost">
             Themes
