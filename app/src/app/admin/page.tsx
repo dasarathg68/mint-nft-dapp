@@ -2,12 +2,28 @@
 import { useState } from "react";
 import { useWriteContract } from "wagmi";
 import { abi, address as contractAddress } from "../../constants";
+import { isAddress } from "ethers";
 const Admin = () => {
   const [status, setStatus] = useState<string>("");
+  const [isValid, setIsValid] = useState(true);
+  const [isFileUploaded, setIsFileUploaded] = useState(false);
+
   const { writeContract } = useWriteContract();
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     const formData = new FormData(event.target);
+    if (
+      !isValid ||
+      !isFileUploaded ||
+      !formData.get("memberName") ||
+      !formData.get("memberRole") ||
+      !formData.get("memberBatch") ||
+      !formData.get("address")
+    ) {
+      setStatus("Invalid form data");
+      return;
+    }
+
     setStatus("Uploading...");
     let result = await fetch("/api/submit", {
       method: "POST",
@@ -31,6 +47,15 @@ const Admin = () => {
       console.error(e);
     }
   };
+  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.currentTarget.files?.[0];
+    if (file && file.size > 0) {
+      setIsFileUploaded(true);
+    } else {
+      setIsFileUploaded(false);
+    }
+  };
+
   return (
     <>
       <div className=" card flex flex-col justify-center items-center min-h-screen">
@@ -52,6 +77,7 @@ const Admin = () => {
               Image:
               <input
                 type="file"
+                onChange={handleFileInput}
                 name="memberImage"
                 className="file-input file-input-primary w-full max-w-xs mr-4 ml-4 p-2 "
               />
@@ -83,8 +109,19 @@ const Admin = () => {
               className="input input-bordered flex items-center gap-2 mt-4"
             >
               Address:
-              <input type="text" name="address" className="grow" />
+              <input
+                type="text"
+                name="address"
+                className="grow"
+                onInput={(e) => {
+                  const inputValue = e.currentTarget.value.trim();
+                  setIsValid(isAddress(inputValue));
+                }}
+              />
             </label>
+            {isValid ? null : (
+              <div className="text-red-800">Invalid address</div>
+            )}
             <button type="submit" className="btn btn-primary mt-4 w-full">
               Mint your NFT
             </button>
