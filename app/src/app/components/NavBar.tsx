@@ -1,10 +1,21 @@
+"use client";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useRouter } from "next/navigation";
 
 export const NavBar = () => {
+  const router = useRouter();
+
   return (
-    <div className="navbar bg-base-100 border z-50 fixed flex justify-center items-center">
+    <div className="navbar bg-base-100 shadow-lg z-50 fixed flex justify-center items-center">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">NFT Club Membership</a>
+        <a
+          className="btn btn-ghost text-xl"
+          onClick={() => {
+            router.push("/admin");
+          }}
+        >
+          NFT Club Membership
+        </a>
       </div>
       <div className="navbar-end">
         <ConnectButton />
@@ -98,17 +109,21 @@ export const NavBar = () => {
             </div>
           </div>
         </div>
-        <div
-          tabIndex={0}
-          role="button"
-          className="btn btn-ghost btn-circle avatar"
-        >
-          <div className="w-10 rounded-full">
-            <img
-              alt="Tailwind CSS Navbar component"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-            />
-          </div>
+      </div>
+
+      <div
+        tabIndex={0}
+        role="button"
+        className="btn btn-ghost btn-circle avatar"
+        onClick={() => {
+          router.push("/member");
+        }}
+      >
+        <div className="w-10 rounded-full">
+          <img
+            alt="Tailwind CSS Navbar component"
+            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+          />
         </div>
       </div>
     </div>

@@ -55,6 +55,7 @@ const Page = () => {
           const url = `https://gateway.pinata.cloud/ipfs/${currUserUri}`;
           const response = await axios.get(url);
           setUserData(response.data);
+          console.log("User data:", response.data);
         } catch (error) {
           console.error("Error fetching metadata:", error);
         }
