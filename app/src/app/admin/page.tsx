@@ -1,11 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useWriteContract } from "wagmi";
 import { abi, address as contractAddress } from "../../constants";
 import { useReadContract, useAccount } from "wagmi";
 import { isAddress } from "ethers";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Admin = () => {
-  const [status, setStatus] = useState<string>("");
   const [isValid, setIsValid] = useState(true);
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -17,13 +19,15 @@ const Admin = () => {
     args: [],
   });
 
-  const { writeContract } = useWriteContract();
+  const { writeContract, isSuccess, isError } = useWriteContract();
   const handleSubmit = async (event: any) => {
     setIsSubmitting(true);
     event.preventDefault();
     refetchOwner();
     if (ownerAddress !== currentAddress) {
-      setStatus("You are not the owner of the contract");
+      toast.error("You are not the owner of the contract", {
+        autoClose: 10000,
+      });
       setIsSubmitting(false);
       return;
     }
@@ -36,20 +40,19 @@ const Admin = () => {
       !formData.get("memberBatch") ||
       !formData.get("address")
     ) {
-      setStatus("Invalid form data");
+      toast.error("Invalid form data");
       setIsSubmitting(false);
       return;
     }
 
-    setStatus("Uploading...");
+    toast.info("Uploading metadata to IPFS...");
     let result = await fetch("/api/submit", {
       method: "POST",
       body: formData,
     });
     result = await result.json();
-    setStatus("Uploaded metadata to IPFS, now minting NFT...");
+    toast.info("Uploaded metadata to IPFS, now minting NFT...");
     await mintNFT((result as any).NFTUri, formData.get("address") as string);
-    setStatus("NFT minted successfully");
     setIsSubmitting(false);
   };
   const mintNFT = async (uri: string, userAddress: string) => {
@@ -60,7 +63,6 @@ const Admin = () => {
         functionName: "safeMint",
         args: [userAddress, uri],
       });
-      console.log("NFT minted successfully");
     } catch (e) {
       console.error(e);
     }
@@ -73,7 +75,18 @@ const Admin = () => {
       setIsFileUploaded(false);
     }
   };
-
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("NFT minted successfully");
+      setIsSubmitting(false);
+    }
+  }, [isSuccess]);
+  useEffect(() => {
+    if (isError) {
+      toast.error("Error minting NFT");
+      setIsSubmitting(false);
+    }
+  }, [isError]);
   return (
     <>
       <div className=" card flex flex-col justify-center items-center min-h-screen">
@@ -153,6 +166,7 @@ const Admin = () => {
         </div>
         <div className="text-center mt-4">{status}</div>
       </div>
+      <ToastContainer draggable position="top-center" />
     </>
   );
 };
