@@ -110,7 +110,26 @@ export const NavBar = () => {
           </div>
         </div>
       </div>
-
+      <div className="flex-none">
+        <ul className="menu menu-horizontal px-1 ">
+          <li>
+            <details className="min-w-36">
+              <summary>Pages</summary>
+              <ul className="bg-base-100 rounded-t-none p-2">
+                <li>
+                  <a onClick={() => router.push("/member")}>Member</a>
+                </li>
+                <li>
+                  <a onClick={() => router.push("/admin")}>Admin</a>
+                </li>
+                <li>
+                  <a onClick={() => router.push("/listNFTs")}>View All NFTs</a>
+                </li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </div>
       <div
         tabIndex={0}
         role="button"

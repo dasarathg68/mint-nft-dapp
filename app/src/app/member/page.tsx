@@ -67,8 +67,10 @@ const Page = () => {
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen">
-      <UserNft data={userData} />
-      <Members members={data} />
+      <div className="mt-20">
+        <UserNft data={userData} />
+        <Members members={data} />
+      </div>
     </div>
   );
 };
