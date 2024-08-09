@@ -21,7 +21,7 @@ const listNFTs = () => {
 
   useEffect(() => {
     if (tokenURIData) {
-      setUri(tokenURIData.filter((uri: any) => uri));
+      setUri((tokenURIData as any).filter((uri: any) => uri));
     }
   }, [tokenURIData]);
 
@@ -30,7 +30,7 @@ const listNFTs = () => {
       setLoading(true);
       if (uri.length > 0) {
         try {
-          const dataArray = [];
+          const dataArray: any = [];
           for (const uriItem of uri) {
             const url = `https://gateway.pinata.cloud/ipfs/${uriItem}`;
             const response = await axios.get(url);

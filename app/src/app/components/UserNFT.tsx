@@ -1,8 +1,11 @@
 "use client";
 import React from "react";
 import { useRouter } from "next/navigation";
+interface UserNFTProps {
+  data?: any;
+}
 
-const UserNFT = ({ data }) => {
+const UserNFT: React.FC<UserNFTProps> = ({ data }) => {
   const router = useRouter();
   if (!data) {
     return (

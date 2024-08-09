@@ -1,6 +1,8 @@
 import React from "react";
-
-const Members = ({ members }) => {
+interface MembersProps {
+  members: any[];
+}
+const Members: React.FC<MembersProps> = ({ members }) => {
   if (!members || members.length === 0) {
     return (
       <div className="text-center text-gray-500 py-4 text-lg">
@@ -49,8 +51,9 @@ const Members = ({ members }) => {
               <td className="p-2">
                 <span className="badge badge-secondary badge-sm rounded-lg italic text-center">
                   {
-                    member.attributes.find((attr) => attr.trait_type === "Role")
-                      .value
+                    member.attributes.find(
+                      (attr: any) => attr.trait_type === "Role"
+                    ).value
                   }
                 </span>
               </td>
