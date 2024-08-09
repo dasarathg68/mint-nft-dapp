@@ -42,7 +42,10 @@ const listNFTs = () => {
   });
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="mt-20">
+      <div className="mt-20 w-11/12 flex flex-col justify-center items-center">
+        <h2 className="text-2xl font-semibold mb-4 text-center">
+          All NFT Holders
+        </h2>
         <Members members={data} />
       </div>
     </div>

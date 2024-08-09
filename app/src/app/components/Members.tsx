@@ -10,32 +10,59 @@ const Members = ({ members }) => {
   }
 
   return (
-    <div>
-      <h2 className="text-2xl font-semibold mb-4 text-center">
-        All NFT Holders
-      </h2>
-      <table className="w-full border-collapse">
+    <div className="overflow-x-auto w-1/2 shadow-2xl">
+      <table className="table w-full border-collapse shadow">
+        {/* Table Head */}
         <thead>
           <tr>
-            <th className="text-left p-2 bg-gray-700">S. No.</th>
-            <th className="text-left p-2 bg-gray-700">Name</th>
-            <th className="text-left p-2 bg-gray-700">Role</th>
+            <th>
+              <label>
+                <input type="checkbox" className="checkbox" />
+              </label>
+            </th>
+            <th className="text-left p-2">Name</th>
+            <th className="text-left p-2">Role</th>
+            <th className="text-right p-2">Description</th>
           </tr>
         </thead>
         <tbody>
           {members.map((member, index) => (
-            <tr key={index} className="border-b last:border-none">
-              <td className="p-2">{index + 1}</td>
-              <td className="p-2">{member.name}</td>
-              <td className="p-2 italic text-center">
-                {
-                  member.attributes.find((attr) => attr.trait_type === "Role")
-                    .value
-                }
+            <tr key={index} className="border-b last:border-none ">
+              <th>
+                <label>
+                  <input type="checkbox" className="checkbox" />
+                </label>
+              </th>
+              <td className="p-2">
+                <div className="flex items-center gap-3">
+                  <div className="avatar">
+                    <div className="mask mask-squircle w-12 h-12">
+                      <img src={member.image} alt={`${member.name}'s avatar`} />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="font-bold">{member.name}</div>
+                    <div className="text-sm opacity-50">{member.location}</div>
+                  </div>
+                </div>
               </td>
+              <td className="p-2">
+                <span className="badge badge-secondary badge-sm rounded-lg italic text-center">
+                  {
+                    member.attributes.find((attr) => attr.trait_type === "Role")
+                      .value
+                  }
+                </span>
+              </td>
+              <th className="p-2 text-right">
+                <button className="btn btn-ghost btn-xs">
+                  {member.description}
+                </button>
+              </th>
             </tr>
           ))}
         </tbody>
+        {/* Table Footer */}
       </table>
     </div>
   );
