@@ -10,6 +10,7 @@ const listNFTs = () => {
   const { address } = useAccount();
   const [uri, setUri] = useState([]);
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const { data: tokenURIData } = useReadContract({
     abi,
@@ -17,13 +18,16 @@ const listNFTs = () => {
     functionName: "getAllURIs",
     args: [],
   });
+
   useEffect(() => {
     if (tokenURIData) {
       setUri(tokenURIData.filter((uri: any) => uri));
     }
   }, [tokenURIData]);
+
   useEffect(() => {
     const fetchMetadata = async () => {
+      setLoading(true);
       if (uri.length > 0) {
         try {
           const dataArray = [];
@@ -35,19 +39,29 @@ const listNFTs = () => {
           setData(dataArray);
         } catch (error) {
           console.error("Error fetching metadata:", error);
+        } finally {
+          setLoading(false);
         }
       }
     };
-    fetchMetadata();
-  });
+
+    if (uri.length > 0) {
+      fetchMetadata();
+    }
+  }, [uri]);
+
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="mt-20 w-11/12 flex flex-col justify-center items-center">
-        <h2 className="text-2xl font-semibold mb-4 text-center">
-          All NFT Holders
-        </h2>
-        <Members members={data} />
-      </div>
+      {!loading ? (
+        <div className="mt-20 w-11/12 flex flex-col justify-center items-center">
+          <h2 className="text-2xl font-semibold mb-4 text-center">
+            All NFT Holders
+          </h2>
+          <Members members={data} />
+        </div>
+      ) : (
+        <span className="loading loading-infinity loading-lg"></span>
+      )}
     </div>
   );
 };
