@@ -8,17 +8,8 @@ import UserNft from "../components/UserNFT";
 
 const Page = () => {
   const { address } = useAccount();
-  const [data, setData] = useState([]);
-  const [userData, setUserData] = useState("");
-  const [uri, setUri] = useState([]);
+  const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  const { data: tokenURIData, refetch: refetchTokenURIs } = useReadContract({
-    abi,
-    address: contractAddress,
-    functionName: "getAllURIs",
-    args: [],
-  });
 
   const { data: currUserUri, refetch: refetchUserURI } = useReadContract({
     abi,
@@ -28,44 +19,9 @@ const Page = () => {
   });
 
   useEffect(() => {
-    refetchTokenURIs();
     refetchUserURI();
   }, []);
 
-  // Set URI when tokenURIData changes
-  useEffect(() => {
-    if (tokenURIData) {
-      setUri(tokenURIData.filter((uri: any) => uri));
-    }
-  }, [tokenURIData]);
-
-  // Fetch metadata when URI changes
-  useEffect(() => {
-    const fetchMetadata = async () => {
-      if (uri.length > 0) {
-        try {
-          setLoading(true);
-          const dataArray = [];
-          for (const uriItem of uri) {
-            const url = `https://gateway.pinata.cloud/ipfs/${uriItem}`;
-            const response = await axios.get(url);
-            dataArray.push(response.data);
-          }
-          setData(dataArray);
-        } catch (error) {
-          console.error("Error fetching metadata:", error);
-        } finally {
-          setLoading(false);
-        }
-      }
-    };
-
-    if (uri.length > 0) {
-      fetchMetadata();
-    }
-  }, [uri]);
-
-  // Fetch user-specific metadata when currUserUri changes
   useEffect(() => {
     const fetchUserMetadata = async () => {
       if (currUserUri) {
