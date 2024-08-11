@@ -5,9 +5,10 @@ import { useAccount, useReadContract } from "wagmi";
 import { abi, address as contractAddress } from "../../constants";
 import axios from "axios";
 import UserNft from "../components/UserNFT";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const Page = () => {
-  const { address } = useAccount();
+  const { address, isConnected } = useAccount();
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -47,7 +48,8 @@ const Page = () => {
   return !loading ? (
     <div className="flex flex-col justify-center items-center min-h-screen">
       <div className="mt-20">
-        <UserNft data={userData} />
+        {isConnected}
+        {isConnected ? <UserNft data={userData} /> : <ConnectButton />}
       </div>
     </div>
   ) : (
