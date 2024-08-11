@@ -28,15 +28,15 @@ Ensure you have the following installed:
 1. Clone the repository:
 
    ```bash
-   git clone git@github.com:dasarathg68/mint-nft-dapp.git```
+   git clone git@github.com:dasarathg68/mint-nft-dapp.git
 2. Install dependencies
    ```bash
    cd app
-   npm install```
+   npm install
    
 ### Enviromental variables
 - 'NEXT_PUBLIC_CONTRACT_ADDRESS' is the deployed contract address.
 - 'NEXT_PUBLIC_CHAIN' is the chain ID that the contract is deployed to.
 ```typescript 
 NEXT_PUBLIC_CONTRACT_ADDRESS="Aeb08E985ddAbf9e5F632a9EA2E6fdDF266C2Ec6"
-NEXT_PUBLIC_CHAIN="11155111" ```
+NEXT_PUBLIC_CHAIN="11155111" 
