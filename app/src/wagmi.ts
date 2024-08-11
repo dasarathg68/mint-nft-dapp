@@ -1,10 +1,10 @@
 import { http, cookieStorage, createConfig, createStorage } from "wagmi";
-import { mainnet, sepolia } from "wagmi/chains";
+import { mainnet, sepolia, base, opBNB, optimism } from "wagmi/chains";
 import { coinbaseWallet, injected, walletConnect } from "wagmi/connectors";
 
 export function getConfig() {
   return createConfig({
-    chains: [mainnet, sepolia],
+    chains: [mainnet, sepolia, base, opBNB, optimism],
     connectors: [
       injected(),
       coinbaseWallet(),
@@ -17,6 +17,9 @@ export function getConfig() {
     transports: {
       [mainnet.id]: http(),
       [sepolia.id]: http(),
+      [base.id]: http(),
+      [opBNB.id]: http(),
+      [optimism.id]: http(),
     },
   });
 }
