@@ -13,7 +13,7 @@ const Page = () => {
 
   const { data: currUserUri, refetch: refetchUserURI } = useReadContract({
     abi,
-    address: contractAddress,
+    address: `0x${contractAddress}`,
     functionName: "getUserURI",
     args: [address],
   });

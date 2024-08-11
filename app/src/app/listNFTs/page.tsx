@@ -21,8 +21,7 @@ const listNFTs = () => {
 
   const { data: tokenURIData } = useReadContract({
     abi,
-    // @ts-ignore: Ignore contract address type error
-    address: contractAddress,
+    address: `0x${contractAddress}`,
     functionName: "getAllURIs",
     args: [],
   });
