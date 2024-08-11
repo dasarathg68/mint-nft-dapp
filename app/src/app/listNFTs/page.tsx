@@ -84,8 +84,9 @@ const listNFTs = () => {
           <button
             className="btn btn-accent mt-4"
             onClick={() => {
-              // @ts-ignore: Ignore chainId type error
-              switchChain({ chainId: Number(chain) });
+              switchChain({
+                chainId: Number(chain) as 1 | 11155111 | 8453 | 204 | 10,
+              });
             }}
           >
             Switch to correct chain
