@@ -10,7 +10,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { useChainId } from "wagmi";
 import { chain } from "@/constants";
 import { useSwitchChain } from "wagmi";
-import { useRouter } from "next/navigation";
 
 const Admin = () => {
   const [isValid, setIsValid] = useState(true);
@@ -20,8 +19,6 @@ const Admin = () => {
   const chainId = useChainId();
   const { switchChain, status } = useSwitchChain();
   const [wrongChain, setWrongChain] = useState(false);
-
-  const router = useRouter();
 
   const { data: ownerAddress, refetch: refetchOwner } = useReadContract({
     abi,
@@ -92,11 +89,6 @@ const Admin = () => {
     }
   }, []);
   useEffect(() => {
-    if (isConnected && currentAddress != ownerAddress) {
-      toast.error("You are not the owner of the contract");
-    }
-  }, [isConnected]);
-  useEffect(() => {
     if (status === "success") window.location.reload();
   }, [status]);
   useEffect(() => {
@@ -113,7 +105,7 @@ const Admin = () => {
   }, [isError]);
   return (
     <>
-      {isConnected && currentAddress == ownerAddress ? (
+      {isConnected ? (
         <div className="card flex flex-col justify-center items-center min-h-screen">
           {wrongChain ? (
             <button
@@ -226,18 +218,6 @@ const Admin = () => {
         <div className="card flex flex-col justify-center items-center min-h-screen">
           Please connect with an admin wallet to use this feature
           <ConnectButton />
-          {wrongChain ? (
-            <button
-              className="btn btn-accent mt-10"
-              onClick={() => {
-                switchChain({
-                  chainId: Number(chain) as 1 | 11155111 | 8453 | 204 | 10,
-                });
-              }}
-            >
-              Switch to the correct chain
-            </button>
-          ) : null}
         </div>
       )}
       <ToastContainer draggable position="top-center" />
