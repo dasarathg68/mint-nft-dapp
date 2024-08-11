@@ -20,12 +20,23 @@ const Admin = () => {
   const { switchChain, status } = useSwitchChain();
   const [wrongChain, setWrongChain] = useState(false);
 
-  const { data: ownerAddress, refetch: refetchOwner } = useReadContract({
+  const [isAdmin, setIsAdmin] = useState(true);
+
+  const {
+    data: ownerAddress,
+    refetch: refetchOwner,
+    isSuccess: ownerRetrievalSuccess,
+  } = useReadContract({
     abi,
     address: `0x${contractAddress}`,
     functionName: "owner",
     args: [],
   });
+  useEffect(() => {
+    if (ownerRetrievalSuccess) {
+      setIsAdmin(currentAddress === ownerAddress);
+    }
+  }, [ownerRetrievalSuccess]);
 
   const { writeContract, isSuccess, isError } = useWriteContract();
   const handleSubmit = async (event: any) => {
@@ -65,8 +76,7 @@ const Admin = () => {
     try {
       writeContract({
         abi,
-        // @ts-ignore: Ignore contract address type error
-        address: contractAddress,
+        address: `0x${contractAddress}`,
         functionName: "safeMint",
         args: [userAddress, uri],
       });
@@ -117,7 +127,7 @@ const Admin = () => {
             >
               Switch to the correct chain
             </button>
-          ) : (
+          ) : isAdmin ? (
             <>
               <h1 className="text-3xl mt-20">Admin Panel</h1>
               <div className="flex justify-center items-center border">
@@ -212,6 +222,11 @@ const Admin = () => {
                 </form>
               </div>
             </>
+          ) : (
+            <div className="text-red-800">
+              Please connect with an admin wallet to use this feature
+              <ConnectButton />{" "}
+            </div>
           )}
         </div>
       ) : (
