@@ -1,4 +1,5 @@
-export const address = "0xAeb08E985ddAbf9e5F632a9EA2E6fdDF266C2Ec6";
+export const address = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "";
+export const chain = process.env.NEXT_PUBLIC_CHAIN || "";
 export const abi = [
   {
     inputs: [
